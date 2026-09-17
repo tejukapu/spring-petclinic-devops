@@ -12,13 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
       - name: build application
-        run: ./mvnw clean package
+        run: mvn --batch-mode --update-snapshots clean package
       - name: build docker image
         run: |
           docker build -t raviteja21k/spring-petclinic-devops:${{ github.sha }} .
